@@ -1,4 +1,4 @@
-import CamplistPage from "@/components/camplist";
+import CamplistPage from "@/components/Camplist";
 import Form from "@/components/Form";
 
 

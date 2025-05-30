@@ -2,16 +2,14 @@ import { fetchCamp } from "@/utils/actions"
 
 export default async function CamplistPage(){
 
-    const camps = await fetchCamp();
-    console.log(camps)
+    const data = await fetchCamp();
+    console.log(data)
 return(
-
 <>
-<h1>data</h1>
-    {camps.map((item,index)=>{
-         return  <li id={index}>{item} </li> 
-    })
-    }
+    {data.map(camp=>{
+        return <li key={camp.id} >{camp.title}</li>
+    })}
+
 </>
 
 )

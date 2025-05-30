@@ -1,11 +1,13 @@
-import Counter from "@/components/Counter";
-
+import Calenda from "@/components/Calendar";
+import sty from "./Time.module.css"
 export default async function Page() {
 
   return (
-    <>
-      <h1> Time</h1>
-      <Counter/>
-    </>
+  
+      <div className={sty.calendar}>
+      <Calenda/>
+      </div>
+     
+   
   )
 }

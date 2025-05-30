@@ -14,10 +14,27 @@ export const createCamps = async(prevState ,formData) =>{
 }
 
 export const fetchCamp = async()=>{
-    const camp = [
-        {id:1 , title: 'Korat'},
-        {id:2 , title: 'สระบุรี'},
-        {id:3 , title: 'นครนายก'},
-    ]
+ const camp = [
+  {
+    "id": 1,
+    "title": "Business Systems Development Analyst",
+  },
+  {
+    "id": 2,
+    "title": "VP Quality Control",
+  },
+  {
+    "id": 3,
+    "title": "Statistician III",
+  },
+  {
+    "id": 4,
+    "title": "Recruiting Manager",
+  },
+  {
+    "id": 5,
+    "title": "Programmer Analyst I",
+  }
+];
     return camp;
 }
