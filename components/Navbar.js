@@ -1,22 +1,23 @@
 import Link from "next/link";
+import sty from "./css/Nav.module.css"
 export default function Navbar(){
     return(
       <>
-    <nav className="flex justify-between  text-2xl">
+    <nav className={sty.nav} >
   <div className="flex gap-3">
-      <Link href='/'>Home</Link>
-      <Link href={'/Time'}>Time</Link>
-      <Link href={'/about'}>About</Link>
-      <Link href={'/info'}>Info</Link>
-      <Link href={'/camp'}>Camp</Link>
+     
   </div>
-  <div className="flex gap-3 ">
-     <Link href={'/login'}>Login</Link>
-    <Link href={'/register'}>Register</Link>
-
+  <div className={sty.div}>
+      <Link href='/'>หน้าแรก</Link>
+      <Link href={'/Time'}>ข่าวPDPA</Link>
+      {/* <Link href={'/about'}>About</Link>
+      <Link href={'/info'}>Info</Link>
+      <Link href={'/camp'}>Camp</Link> */}
+    <Link href={'/login'} className={sty.button}>LOGIN</Link>
+ 
   </div>
 </nav>
-<hr className="mb-4"/>
+
 </>
 )
 }

@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap');
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-weight: 500;
+
+    margin-top: 2em;
+    margin-bottom: 20px;
+}
+.div{
+    display: flex;
+    gap: 2em;
+    align-items: center;
+
+}
+.button{
+
+padding: 5px 20px;
+border-radius: 5px;
+background-color:#559BF8 ;
+color: #FFFFFF;
+font-weight: 600;
+}

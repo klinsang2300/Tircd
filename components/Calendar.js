@@ -4,7 +4,7 @@ import cld from './css/Calendar.module.css'
 
 export default function Calenda() {
     const data = updateCalendar();
-    // console.log(data)
+    console.log(data)
     return(
        
        <div className={cld.calendar}>
@@ -12,7 +12,7 @@ export default function Calenda() {
                {/* <button id='prevBtn' >
                     <i className={cld.left}></i>
                </button> */}
-               {/* <div className={cld.monthYear} id='monthYear'>{data}</div> */}
+               <div className={cld.monthYear} id='monthYear'>{data.monthYear}</div>
                {/* <button id='nextBtn' >
                     <i className={cld.right}></i>
                </button> */}
@@ -24,9 +24,16 @@ export default function Calenda() {
                 <div className={cld.day}>พฤหัส</div>
                 <div className={cld.day}>ศุกร์</div>
                 <div className={cld.day}>เสาร์</div>
-                <div className={cld.day}>อาทิตย์</div>
+                <div className={`${cld.day} ${cld.holiday}`}>อาทิตย์</div>
             </div>
-            <div className={cld.dates} id='dates'></div>
+            <div className={cld.dates}>
+            {data.daycalendar.map((item,index)=>{
+               const holi = item.id %7===0?cld.holiday :'';
+                    return (
+                         
+                    <div  className={`${cld.date} ${item.act? cld.active:''} ${item.ina?cld.inactive:''} ${holi}`} key={index}>{item.Day}</div>)
+            })}
+            </div>
        </div>
       
     )
