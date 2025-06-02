@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap');
+
+.footer {
+    height: 4.3rem;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-inline: auto;
+    padding-inline: 2%;
+    padding-block:15px 8px;
+    width: 100%;
+    @media (width<480px) {
+        font-size: 14px;
+  
+    }
+}
+
+.div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #E6E6E6;
+    width: 100%;
+    height: 100%;
+    padding-top: 5px;
+
+}

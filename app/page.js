@@ -1,10 +1,11 @@
+import Calenda from "@/components/Calendar";
 
 
 
 export default function Home() {
   return (
-  <>  
-  <h1>Test Page1 </h1>
-  </>
+ <div className="center">
+      <Calenda />
+  </div> 
   );
 }

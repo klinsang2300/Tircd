@@ -4,7 +4,6 @@ import cld from './css/Calendar.module.css'
 
 export default function Calenda() {
     const data = updateCalendar();
-    console.log(data)
     return(
        
        <div className={cld.calendar}>
@@ -12,7 +11,7 @@ export default function Calenda() {
                {/* <button id='prevBtn' >
                     <i className={cld.left}></i>
                </button> */}
-               <div className={cld.monthYear} id='monthYear'>{data.monthYear}</div>
+               <div  id='monthYear'>{data.monthYear}</div>
                {/* <button id='nextBtn' >
                     <i className={cld.right}></i>
                </button> */}

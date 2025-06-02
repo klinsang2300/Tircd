@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import './globals.css'
 import {Inter} from "next/font/google";
+import Footer from "@/components/Footer";
 export const  metadata = {
   title: 'TimeRecrod',
   description: 'Next Test',
@@ -11,10 +12,13 @@ const pageFont = Inter({
  
 export default function RootLayout({ children }) {
   return (
-<html  >
-    <body>
+<html>
+    <body >
       <Navbar/>
-      {children}
+  
+    <main >{children}</main>
+   
+      <Footer/>
     </body>
 </html>
   );
