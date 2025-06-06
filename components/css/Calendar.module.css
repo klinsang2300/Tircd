@@ -14,12 +14,16 @@
 
 }
 
+.monthYear {
+    cursor: pointer;
+}
+
 .header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 20px;
-    padding-bottom: 0px;
+    padding: 20px 0px;
+
     font-size: 44px;
     font-weight: 600;
     border-bottom: 2px solid #ff0000;
@@ -29,6 +33,44 @@
         font-size: 36px;
         font-weight: 600;
     }
+
+    .header_button {
+        display: flex;
+        flex-direction: column;
+
+        button {
+
+
+            border: none;
+            padding: 5px 0px 5px 15px;
+
+
+            cursor: pointer;
+            display: flex;
+            /* ใช้ flexbox เพื่อจัดเรียงข้อความและสามเหลี่ยม */
+            align-items: center;
+            /* จัดให้อยู่กึ่งกลางในแนวตั้ง */
+            gap: 10px;
+
+            transition: background-color 0.3s ease;
+
+            .button_up {
+                border-left: 13px solid transparent;
+                border-right: 13px solid transparent;
+                border-bottom: 20px solid #B1B1B1;
+
+            }
+
+            .button_down {
+                border-left: 13px solid transparent;
+                border-right: 13px solid transparent;
+                border-top: 20px solid #B1B1B1;
+                margin-top: 5px;
+            }
+        }
+
+    }
+
 }
 
 .days {
@@ -40,10 +82,11 @@
     width: 1080px;
     min-width: 320px;
 
-    @media(width<1080px )  {
+    @media(width<1080px) {
         width: 95dvw;
     }
-  @media (width<480px) {
+
+    @media (width<480px) {
 
         font-size: 18px;
         padding: 15px 2px;
@@ -64,8 +107,8 @@
     font-size: 24px;
     padding: 15px 20px;
     border: 1px solid #adadad;
-      @media (width<480px) {
 
+    @media (width<480px) {
         font-size: 20px;
         padding: 15px 5px;
     }
@@ -88,14 +131,69 @@
 
     @media(width<1080px) {
         padding: 0px;
-       
+
     }
+
+    @media (width<480px) {
+        font-size: 20px;
+        width: 100%;
+    }
+}
+
+.months {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 1070px;
+    font-weight: 500;
+    font-size: 28px;
+    padding: 20px 0px;
+
     @media (width<480px) {
 
         font-size: 20px;
-     width: 100%;
+        padding: 15px 5px;
+    }
+
+    @media(width<1080px) {
+        width: 90dvw;
+
+    }
+
+    .month {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        aspect-ratio: 1 / 0.7;
+        transition: 0.2s;
+        padding: 20px;
+
+        text-align: center;
+        border: 1px solid #8F8F8F;
+
+
+        @media (width<720px) {
+            font-size: 20px;
+            padding: 0px;
+        }
+
+        @media (width<490px) {
+            font-size: 16px;
+            padding: 0px;
+        }
+    }
+
+    .month.active,
+    .month:hover {
+        color: #B42D2D;
+        font-weight: 700;
+        -webkit-text-stroke: 0.5px black; /* ความหนา 2px, สีดำ */
+    
     }
 }
+
+
 
 .date:hover,
 .date.active {
@@ -111,4 +209,9 @@
 
 .holiday {
     color: #B42D2D;
+}
+
+.hide {
+    display: none;
+    transition: 3ms;
 }
