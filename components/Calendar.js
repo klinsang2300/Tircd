@@ -1,7 +1,7 @@
 'use client'
 
 import cld from './css/Calendar.module.css'
-import { dayinMonth, formatMonthYear, formatYear, getMonthYear, getWeekDays } from '@/lib/date-utils'
+import { dayinMonth, formatMonthYear, formatYear, getMonthYear, getWeekDays, getYears } from '@/lib/date-utils'
 import { useMemo, useState } from 'react'
 
 
@@ -22,6 +22,10 @@ export default function Calendar() {
      const calendar = useMemo(() => {
           return dayinMonth(year, month)
      }, [year, month])
+
+     const years = useMemo(()=>{
+          return getYears();
+     },[year,mode==="Y"])
 
      const formatHearder = useMemo(() => {
           let formatM;
@@ -111,7 +115,12 @@ export default function Calendar() {
                          })}
                     </div>
                </div>
-
+               <div className={mode != 'Y' ? cld.hide : ''}>
+                    <div className={cld.years}>
+                         {years.map((item,index)=>{
+                              return (<div className={`${cld.year} ${item.act ? cld.active : ''} `} key={index}>{item.Year}</div>)
+                         })} </div>
+               </div>
           </div>
 
      )
