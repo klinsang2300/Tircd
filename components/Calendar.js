@@ -33,7 +33,6 @@ export default function Calendar() {
           return (formatM);
      }, [currentDate, mode])
 
-     const today = new Date();
      const isToday = (day) => {
           const CalendarDate = new Date(day)
           return (CalendarDate.toDateString() === new Date().toDateString());
@@ -48,10 +47,37 @@ export default function Calendar() {
           }
      };
      const handleSelectMonth = (even) => {
-          setCurrentDate(new Date(year,even.currentTarget.id,1));
+          setCurrentDate(new Date(year, even.currentTarget.id, 1));
           setMode("D");
-          // setCurrentDate();
      };
+     const handleNextMonth = () => {
+          switch (mode) {
+               case "D":
+                    setCurrentDate(prevDate => {
+                         const newDate = new Date(prevDate);
+                         newDate.setMonth(prevDate.getMonth() + 1);
+                         return newDate;
+                    });
+                    break;
+          }
+     };
+     const handlePrevMonth = () => {
+
+          switch (mode) {
+               case "D":
+                    setCurrentDate(prevDate => {
+                         const newDate = new Date(prevDate);
+                         newDate.setMonth(prevDate.getMonth() - 1);
+                         return newDate;
+                    });
+                    break;
+
+          }
+
+     };
+
+
+
      return (
           <div className={cld.calendar}>
                <div className={cld.header}>
@@ -60,8 +86,8 @@ export default function Calendar() {
                          {formatHearder}
                     </div>
                     <div className={cld.header_button}>
-                         <button ><i className={cld.button_up}></i></button>
-                         <button ><i className={cld.button_down}></i></button>
+                         <button onClick={handleNextMonth}><i className={cld.button_up}></i></button>
+                         <button onClick={handlePrevMonth}><i className={cld.button_down}></i></button>
                     </div>
                </div>
                <div className={mode != 'D' ? cld.hide : ''}>
@@ -72,20 +98,20 @@ export default function Calendar() {
                     </div>
                     <div className={cld.dates}>
                          {calendar.day.map((item, index) => (
-                              <div className={`${cld.date} ${isToday(item.Day) ? cld.active : ''} ${item.holi ? cld.holiday : ''} ${item.ina?cld.inactive:''}`} key={index}>
+                              <div className={`${cld.date} ${isToday(item.Day) ? cld.active : ''} ${item.holi ? cld.holiday : ''} ${item.ina ? cld.inactive : ''}`} key={index}>
                                    {item.Day.getDate()}
                               </div>
                          ))}
                     </div>
                </div >
                <div className={mode != 'M' ? cld.hide : ''}>
-
                     <div className={cld.months}>
                          {months.map((item, index) => {
                               return (<div className={`${cld.month} ${item.act ? cld.active : ''} `} id={item.id} key={index} onClick={handleSelectMonth} >{item.month}</div>)
                          })}
                     </div>
                </div>
+
           </div>
 
      )
