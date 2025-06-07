@@ -14,8 +14,8 @@ export default function Navbar() {
           </div>
           <div className={sty.div}>
             <Link href='/'>หน้าแรก</Link>
-            <Link href={'/Time'}>ข่าวPDPA</Link>
-           <div className={sty.button}>  <Link   href={'/Login'}>LOGIN</Link></div>
+            <Link href={'/time'}>ข่าวPDPA</Link>
+           <div className={sty.button}>  <Link   href={'/login'}>LOGIN</Link></div>
           </div>
         </div>
       </nav>

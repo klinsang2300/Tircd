@@ -9,6 +9,7 @@ import { useMemo, useState } from 'react'
 
 export default function Calendar() {
      const [currentDate, setCurrentDate] = useState(new Date());
+     const [currentYearGroupStart, setCurrentYearGroupStart] = useState(Math.floor(currentDate.getFullYear() / 10) * 10);
      const [mode, setMode] = useState('D');
 
      const year = currentDate.getFullYear();
@@ -17,25 +18,34 @@ export default function Calendar() {
 
      const months = useMemo(() => {
           return getMonthYear(currentDate)
-     }, [currentDate])
+     }, [currentDate, mode === "M"])
 
      const calendar = useMemo(() => {
           return dayinMonth(year, month)
      }, [year, month])
 
-     const years = useMemo(()=>{
-          return getYears();
-     },[year,mode==="Y"])
+     const years = useMemo(() => {
+          return getYears(currentDate.getFullYear(), currentYearGroupStart);
+     }, [currentYearGroupStart, mode === "Y"])
 
      const formatHearder = useMemo(() => {
           let formatM;
           if (mode === "D") {
                formatM = formatMonthYear(currentDate);
-          } else {
+          } else if (mode === "M") {
                formatM = formatYear(currentDate)
+          } else if (mode === "Y") {
+               const minYear = years.reduce((prev,current)=>{
+                    return (prev.Year < current.Year)?prev:current;
+               })
+                const maxYear = years.reduce((prev,current)=>{
+                    return (prev.Year > current.Year)?prev:current;
+               })
+             
+               return (`${minYear.Year} - ${maxYear.Year}`)
           }
           return (formatM);
-     }, [currentDate, mode])
+     }, [currentDate, currentYearGroupStart,mode])
 
      const isToday = (day) => {
           const CalendarDate = new Date(day)
@@ -51,17 +61,38 @@ export default function Calendar() {
           }
      };
      const handleSelectMonth = (even) => {
-          setCurrentDate(new Date(year, even.currentTarget.id, 1));
           setMode("D");
+          setCurrentDate(new Date(year, even.currentTarget.id, 1));
+
+     };
+     const handleSelectYear = (even) => {
+          setMode("M");
+          const idYear = parseInt(even.currentTarget.id);
+          const Year = years.find(year => year.id === idYear).Year
+          setCurrentDate(new Date(Year - 543, 0, 1));
+
      };
      const handleNextMonth = () => {
           switch (mode) {
                case "D":
                     setCurrentDate(prevDate => {
+
                          const newDate = new Date(prevDate);
                          newDate.setMonth(prevDate.getMonth() + 1);
                          return newDate;
                     });
+
+                    break;
+               case "M":
+                    setCurrentDate(prevDate => {
+                         const nextYear = prevDate.getFullYear() + 1
+                         const newDate = new Date(nextYear, 0);
+                         console.log(newDate)
+                         return newDate
+                    })
+                    break
+               case "Y":
+                    setCurrentYearGroupStart(preavDate => preavDate - 10)
                     break;
           }
      };
@@ -74,6 +105,17 @@ export default function Calendar() {
                          newDate.setMonth(prevDate.getMonth() - 1);
                          return newDate;
                     });
+                    break;
+               case "M":
+                    setCurrentDate(prevDate => {
+                         const nextYear = prevDate.getFullYear() - 1
+                         const newDate = new Date(nextYear, 0);
+                         console.log(newDate)
+                         return newDate
+                    })
+                    break;
+               case "Y":
+                    setCurrentYearGroupStart(preavDate => preavDate + 10)
                     break;
 
           }
@@ -117,8 +159,8 @@ export default function Calendar() {
                </div>
                <div className={mode != 'Y' ? cld.hide : ''}>
                     <div className={cld.years}>
-                         {years.map((item,index)=>{
-                              return (<div className={`${cld.year} ${item.act ? cld.active : ''} `} key={index}>{item.Year}</div>)
+                         {years.map((item, index) => {
+                              return (<div className={`${cld.year} ${item.act ? cld.active : ''} `} id={item.id} key={index} onClick={handleSelectYear}>{item.Year}</div>)
                          })} </div>
                </div>
           </div>
