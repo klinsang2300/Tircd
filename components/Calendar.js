@@ -87,7 +87,6 @@ export default function Calendar() {
                     setCurrentDate(prevDate => {
                          const nextYear = prevDate.getFullYear() + 1
                          const newDate = new Date(nextYear, 0);
-                         console.log(newDate)
                          return newDate
                     })
                     break
@@ -110,7 +109,6 @@ export default function Calendar() {
                     setCurrentDate(prevDate => {
                          const nextYear = prevDate.getFullYear() - 1
                          const newDate = new Date(nextYear, 0);
-                         console.log(newDate)
                          return newDate
                     })
                     break;
@@ -121,8 +119,6 @@ export default function Calendar() {
           }
 
      };
-
-
 
      return (
           <div className={cld.calendar}>
@@ -137,6 +133,7 @@ export default function Calendar() {
                     </div>
                </div>
                <div className={mode != 'D' ? cld.hide : ''}>
+                  
                     <div className={cld.days}>
                          {weekDays.map((item, index) => (
                               <div key={index} className={`${cld.day} ${item.holi ? cld.holiday : ''}`}>{item.day}</div>

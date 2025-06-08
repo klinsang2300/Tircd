@@ -1,10 +1,8 @@
-
-export default function LoginPage(){
-    return(
-<>
-<h1>
-    LoginPage
-    </h1></>
-
+import FromLogin from "@/components/FormLogin";
+export default function LoginPage() {
+    return (
+        <div className="mainPageLogiin">
+            <FromLogin/>
+        </div>
     )
 }

@@ -1,25 +1,27 @@
 import Navbar from "@/components/Navbar";
 import './globals.css'
-import {Inter} from "next/font/google";
+import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
-export const  metadata = {
+
+export const metadata = {
   title: 'TimeRecrod',
   description: 'Next Test',
 }
 const pageFont = Inter({
   subsets: ['greek'],
 })
- 
+
 export default function RootLayout({ children }) {
+
   return (
-<html>
-    <body >
-      <Navbar/>
-  
-    <main >{children}</main>
+    <html>
+      <body >
    
-      <Footer/>
-    </body>
-</html>
+
+        <main >{children}</main>
+
+
+      </body>
+    </html>
   );
 }
