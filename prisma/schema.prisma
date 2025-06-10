@@ -1,0 +1,37 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["views"]
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      =  env("DATABASE_URL")
+}
+
+model HOLIDAY_M {
+  DT       DateTime  @id(map: "PK_HOLIDAY_M") @db.Date
+  Day_name String?   @db.VarChar(50)
+  CRT_PRN  String?   @db.VarChar(4)
+  CRT_DT   DateTime? @default(now(), map: "DF_HOLIDAY_M_CRT_DT")
+  UPD_PRN  String?   @db.VarChar(4)
+  UPD_DT   DateTime?
+}
+
+model TDATE {
+  T_ID       Int       @id(map: "PK_TDATE") @default(autoincrement())
+  T_C_ID     Int
+  T_STA      Boolean
+  T_DATETIME DateTime?
+  T_DATE     DateTime  @db.Date
+  T_TIME     DateTime  @db.Time
+  IN_DATE    DateTime  @default(now(), map: "DF_TDATE_IN_DATE")
+  UP_DATE    DateTime?
+}
+
+model TUSER {
+  T_C_ID  Int     @id(map: "PK_TUSER")
+  user_id String? @db.VarChar(50)
+  pass    String? @db.VarChar(50)
+  F_name  String? @db.VarChar(50)
+  L_name  String? @db.VarChar(50)
+}

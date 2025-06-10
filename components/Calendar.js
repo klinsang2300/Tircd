@@ -2,7 +2,7 @@
 
 import cld from './css/Calendar.module.css'
 import { dayinMonth, formatMonthYear, formatYear, getMonthYear, getWeekDays, getYears } from '@/lib/date-utils'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 
 
@@ -11,7 +11,7 @@ export default function Calendar() {
      const [currentDate, setCurrentDate] = useState(new Date());
      const [currentYearGroupStart, setCurrentYearGroupStart] = useState(Math.floor(currentDate.getFullYear() / 10) * 10);
      const [mode, setMode] = useState('D');
-
+     const [holiday, setHoliday] = useState(null)
      const year = currentDate.getFullYear();
      const month = currentDate.getMonth();
      const weekDays = getWeekDays();
@@ -35,19 +35,20 @@ export default function Calendar() {
           } else if (mode === "M") {
                formatM = formatYear(currentDate)
           } else if (mode === "Y") {
-               const minYear = years.reduce((prev,current)=>{
-                    return (prev.Year < current.Year)?prev:current;
+               const minYear = years.reduce((prev, current) => {
+                    return (prev.Year < current.Year) ? prev : current;
                })
-                const maxYear = years.reduce((prev,current)=>{
-                    return (prev.Year > current.Year)?prev:current;
+               const maxYear = years.reduce((prev, current) => {
+                    return (prev.Year > current.Year) ? prev : current;
                })
-             
+
                return (`${minYear.Year} - ${maxYear.Year}`)
           }
           return (formatM);
-     }, [currentDate, currentYearGroupStart,mode])
+     }, [currentDate, currentYearGroupStart, mode])
 
      const isToday = (day) => {
+
           const CalendarDate = new Date(day)
           return (CalendarDate.toDateString() === new Date().toDateString());
      };
@@ -96,7 +97,6 @@ export default function Calendar() {
           }
      };
      const handlePrevMonth = () => {
-
           switch (mode) {
                case "D":
                     setCurrentDate(prevDate => {
@@ -117,13 +117,31 @@ export default function Calendar() {
                     break;
 
           }
-
      };
+     const isHoliday = (date)=>{
+          if(date===null || holiday === null) return false;
+            const holi = holiday.some(holiday =>new Date(holiday.DT).toDateString() === date.toDateString());
+            return holi
+     }
+     useEffect(() => {
+          async function fetchData() {
+               try {
+                    const res = await fetch('/api/holiday'); // Call your internal API route
+                    if (!res.ok) {
+                         throw new Error('Failed to fetch from API route');
+                    }
+                    const json = await res.json();
+                    setHoliday(json);
+               } catch (err) {
+                    console.log(err)
+               }
+          }
+          fetchData();
+     }, [currentDate]);
 
      return (
           <div className={cld.calendar}>
                <div className={cld.header}>
-
                     <div className={`${cld.monthYear}`} onClick={handleHeader} id={mode}>
                          {formatHearder}
                     </div>
@@ -133,7 +151,7 @@ export default function Calendar() {
                     </div>
                </div>
                <div className={mode != 'D' ? cld.hide : ''}>
-                  
+
                     <div className={cld.days}>
                          {weekDays.map((item, index) => (
                               <div key={index} className={`${cld.day} ${item.holi ? cld.holiday : ''}`}>{item.day}</div>
@@ -141,7 +159,7 @@ export default function Calendar() {
                     </div>
                     <div className={cld.dates}>
                          {calendar.day.map((item, index) => (
-                              <div className={`${cld.date} ${isToday(item.Day) ? cld.active : ''} ${item.holi ? cld.holiday : ''} ${item.ina ? cld.inactive : ''}`} key={index}>
+                              <div className={`${cld.date} ${isToday(item.Day) ? cld.active : ''} ${item.holi ||isHoliday(item.Day) ? cld.holiday : ''} ${item.ina ? cld.inactive : ''}`} key={index}>
                                    {item.Day.getDate()}
                               </div>
                          ))}
