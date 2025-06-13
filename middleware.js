@@ -1,7 +1,7 @@
 
 import { NextResponse } from 'next/server';
 
-import { getSession, SESSION_COOKIE_NAME } from './lib/auth'; 
+import { getSession, SESSION_COOKIE_NAME } from './lib/auth';
 
 
 const protectedRoutes = ['/time'];
@@ -9,8 +9,7 @@ const protectedRoutes = ['/time'];
 const publicRoutesIfLoggedIn = ['/login', '/register'];
 
 export async function middleware(request) {
- const session = await getSession(); 
-
+  const session = await getSession();
   const currentPath = request.nextUrl.pathname;
 
 
@@ -25,12 +24,11 @@ export async function middleware(request) {
 
   if (publicRoutesIfLoggedIn.includes(currentPath)) {
     if (session) {
-
       return NextResponse.redirect(new URL('/time', request.url));
     }
   }
 
-  return NextResponse.next(); 
+  return NextResponse.next();
 }
 
 

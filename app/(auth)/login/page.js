@@ -1,11 +1,15 @@
+
+
+
+
 import FromLogin from "@/components/FormLogin";
 
 
-export default async function LoginPage() {
+export default  function LoginPage() {
 
     return (
         <div className="mainPageLogiin">
-            <FromLogin/>
+                <FromLogin  />
         </div>
     )
 }

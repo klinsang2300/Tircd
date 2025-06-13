@@ -1,9 +1,10 @@
-export default function RegisterPage(){
+import FormRegisPage from "@/components/FormRegister";
+
+
+export default function RegisterPage() {
     return (
-        <>
-        
-            <h1>RegisterPage</h1>
-        
-        </>
+        <div className="mainPageLogiin">
+            <FormRegisPage />
+        </div>      
     )
 }

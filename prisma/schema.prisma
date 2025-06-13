@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "sqlserver"
-  url      =  env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model HOLIDAY_M {
@@ -30,7 +30,7 @@ model TDATE {
 
 model TUSER {
   T_C_ID  Int     @id(map: "PK_TUSER")
-  user_id String? @db.VarChar(50)
+  user_id String? @db.VarChar(50) @unique
   pass    String? @db.VarChar(50)
   F_name  String? @db.VarChar(50)
   L_name  String? @db.VarChar(50)

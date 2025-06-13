@@ -137,7 +137,7 @@ export default function Calendar() {
                }
           }
           fetchData();
-     }, [currentDate]);
+     }, []);
 
      return (
           <div className={cld.calendar}>
